@@ -29,6 +29,12 @@ class LightControllerClass {
 
   setPower(status: CharacteristicValue) { //set power of accessory
     if(this.outputLogs) console.log("Turning the '%s' %s", this.name, status ? "on" : "off");
+    let servce = require('node-gpio');
+    let GPIO = servce.GPIO;
+    let led=new GPIO('1');
+    led.open();
+    led.setMode(servce.OUT);
+    led.write(status?servce.HIGHT:servce.LOW);
     this.power = status;
   }
 
